@@ -6,10 +6,12 @@ import dev.joaoneto.mercado_livro.controller.request.PutBookRequest
 import dev.joaoneto.mercado_livro.controller.request.PutCustomerRequest
 import dev.joaoneto.mercado_livro.controller.response.BookResponse
 import dev.joaoneto.mercado_livro.controller.response.CustomerResponse
+import dev.joaoneto.mercado_livro.controller.response.PageResponse
 import dev.joaoneto.mercado_livro.enums.BookStatus
 import dev.joaoneto.mercado_livro.enums.CustomerStatus
 import dev.joaoneto.mercado_livro.model.BookModel
 import dev.joaoneto.mercado_livro.model.CustomerModel
+import org.springframework.data.domain.Page
 
 fun PostCustomerRequest.toCustomerModel(): CustomerModel {
     return CustomerModel(name = this.name, email = this.email, status = CustomerStatus.ATIVO, password = this.password)
@@ -21,7 +23,8 @@ fun PutCustomerRequest.toCustomerModel(customer: CustomerModel): CustomerModel {
         name = this.name,
         email = this.email,
         status = customer.status,
-        password = customer.password
+        password = customer.password,
+        roles = customer.roles
     )
 }
 
@@ -52,4 +55,8 @@ fun BookModel.toResponse(): BookResponse {
         customer = this.customer,
         status = this.status
     )
+}
+
+fun <T> Page<T>.toPageResponse(): PageResponse<T> {
+    return PageResponse(this.content, this.number, this.totalElements, this.totalPages)
 }

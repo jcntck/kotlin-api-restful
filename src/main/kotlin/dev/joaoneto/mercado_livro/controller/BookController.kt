@@ -3,7 +3,9 @@ package dev.joaoneto.mercado_livro.controller
 import dev.joaoneto.mercado_livro.controller.request.PostBookRequest
 import dev.joaoneto.mercado_livro.controller.request.PutBookRequest
 import dev.joaoneto.mercado_livro.controller.response.BookResponse
+import dev.joaoneto.mercado_livro.controller.response.PageResponse
 import dev.joaoneto.mercado_livro.extension.toBookModel
+import dev.joaoneto.mercado_livro.extension.toPageResponse
 import dev.joaoneto.mercado_livro.extension.toResponse
 import dev.joaoneto.mercado_livro.service.BookService
 import dev.joaoneto.mercado_livro.service.CustomerService
@@ -25,8 +27,8 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("books")
 class BookController(
-    val bookService: BookService,
-    val customerService: CustomerService
+    private val bookService: BookService,
+    private val customerService: CustomerService
 ) {
 
     @PostMapping
@@ -37,12 +39,12 @@ class BookController(
     }
 
     @GetMapping
-    fun findAll(@PageableDefault(page = 0, size = 10) pageable: Pageable): Page<BookResponse> =
-        bookService.findAll(pageable).map { it.toResponse() }
+    fun findAll(@PageableDefault(page = 0, size = 10) pageable: Pageable): PageResponse<BookResponse> =
+        bookService.findAll(pageable).map { it.toResponse() }.toPageResponse()
 
     @GetMapping("/actives")
-    fun findActives(@PageableDefault(page = 0, size = 10) pageable: Pageable): Page<BookResponse> =
-        bookService.findActives(pageable).map { it.toResponse() }
+    fun findActives(@PageableDefault(page = 0, size = 10) pageable: Pageable): PageResponse<BookResponse> =
+        bookService.findActives(pageable).map { it.toResponse() }.toPageResponse()
 
     @GetMapping("/{id}")
     fun findById(@PathVariable id: Int): BookResponse {

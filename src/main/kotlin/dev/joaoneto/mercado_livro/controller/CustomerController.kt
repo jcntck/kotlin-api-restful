@@ -3,7 +3,9 @@ package dev.joaoneto.mercado_livro.controller
 import dev.joaoneto.mercado_livro.controller.request.PostCustomerRequest
 import dev.joaoneto.mercado_livro.controller.request.PutCustomerRequest
 import dev.joaoneto.mercado_livro.controller.response.CustomerResponse
+import dev.joaoneto.mercado_livro.controller.response.PageResponse
 import dev.joaoneto.mercado_livro.extension.toCustomerModel
+import dev.joaoneto.mercado_livro.extension.toPageResponse
 import dev.joaoneto.mercado_livro.extension.toResponse
 import dev.joaoneto.mercado_livro.security.UserCanOnlyAccessTheirOwnResource
 import dev.joaoneto.mercado_livro.service.CustomerService
@@ -18,15 +20,15 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("customers")
 class CustomerController(
-    val customerService: CustomerService
+    private val customerService: CustomerService
 ) {
 
     @GetMapping
     fun getAll(
         @RequestParam name: String?,
         @PageableDefault(page = 0, size = 10) pageable: Pageable
-    ): Page<CustomerResponse> {
-        return customerService.getAll(name, pageable).map { it.toResponse() }
+    ): PageResponse<CustomerResponse> {
+        return customerService.getAll(name, pageable).map { it.toResponse() }.toPageResponse()
     }
 
     @PostMapping

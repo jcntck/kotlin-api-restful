@@ -1,0 +1,18 @@
+spring:
+  profiles:
+    active: dev
+
+  application:
+    name: mercado-livro
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  # Database
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # JSON
+  jackson:
+    default-property-inclusion: non_null
