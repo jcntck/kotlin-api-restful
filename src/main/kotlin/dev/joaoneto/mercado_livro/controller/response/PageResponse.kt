@@ -1,6 +1,6 @@
 package dev.joaoneto.mercado_livro.controller.response
 
-class PageResponse<T>(
+data class PageResponse<T>(
     var items: List<T>,
     var currentPage: Int,
     var totalItems: Long,

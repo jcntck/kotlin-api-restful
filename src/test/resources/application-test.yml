@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: mercado-livro
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/mercadolivrotest?createDatabaseIfNotExist=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  flyway:
+    baseline-on-migrate: true
+
+  jackson:
+    default-property-inclusion: non_null
+
+jwt:
+  secret: 5bf3ff37-9ae5-4b70-a09a-ba6795cdb9b5
+  expiration: 99999999
+

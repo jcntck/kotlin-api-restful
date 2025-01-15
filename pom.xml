@@ -109,7 +109,12 @@
 			<version>0.12.6</version>
 			<scope>runtime</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>io.mockk</groupId>
+			<artifactId>mockk-jvm</artifactId>
+			<version>1.13.16</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -131,6 +136,7 @@
 						<plugin>spring</plugin>
 						<plugin>jpa</plugin>
 						<plugin>all-open</plugin>
+						<plugin>no-arg</plugin>
 					</compilerPlugins>
 					<pluginOptions>
 						<option>all-open:annotation=jakarta.persistence.Entity</option>
@@ -150,6 +156,34 @@
 						<version>${kotlin.version}</version>
 					</dependency>
 				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven-surefire-plugin.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.12</version>
+				<configuration>
+					<output>file</output>
+					<append>true</append>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
