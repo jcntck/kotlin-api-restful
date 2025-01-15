@@ -21,3 +21,9 @@ Trata-se de uma api simples de compra de livros nomeado como `Mercado Livro` ond
 4. Admin (Apenas para validar o conceito de Roles do Spring Security)
 
 O banco de dados utilizado neste projeto foi o MySQL de forma dockerizada simples, motivo do qual não possui `Dockerfile` ou `docker-compose.yaml` neste projeto.
+
+## Outras informações
+Abaixo está o certificado de conclusão do curso, assim como as collections do Postman para possíveis testes.
+
+- [Certificado](docs/udemy_certificado.pdf)
+- [Postman Collection](docs/mercado-livro-routes.postman_collection.json)
